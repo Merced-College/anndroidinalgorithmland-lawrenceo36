@@ -22,3 +22,5 @@ Extract (unzip) the file on your computer.
 Place the extracted audio file into the project folder named content.
 
 Download all of the whole content folder, and put this in your project.
+
+Projects setup completed successfully
