@@ -53,7 +53,7 @@ public class LeaderboardAlgorithms {
     		//insert number[i] into sorted part
     		//stopping once numbers[i] in correct position 
     		//while (j > 0 && numbers[j] < numbers[j -1]) 
-    		while (j > 0 && list.get(j).getScore() > list.get(j-1).getScore()) {
+    		while (j > 0 && list.get(j).getUsername().compareToIgnoreCase(list.get(j - 1).getUsername()) < 0) {
     			
     			//Swap numbers[j] and numbers [j - 1]
     			//int temp = numbers[j];
@@ -76,7 +76,57 @@ public class LeaderboardAlgorithms {
      * @return index of the matching entry, or -1 if not found
      */
     public static int binarySearchByUsername(ArrayList<ScoreEntry> list, String username) {
-        // TODO
+        //'low' and 'high' variables used to define the scope of my list
+    	int low = 0;
+    	int high = list.size() - 1; 
+    	
+    	//as long as were within the scope of the list continue through the list
+    	while( low <= high) {
+    		//find the mid point of our list(typical binary search low + high/ 2) for integers
+    		//but using strings and looking out for scope errors
+    		int mid = low +(high - low) / 2; 
+    		String midUser = list.get(mid).getUsername();
+    		
+    		//comparing our midpoint will return 0 if they are equal,
+    		//negative if mid comes before target and positive if after 
+    		int comparison = midUser.compareTo(username);
+    		//check if we found a match
+    		if(comparison == 0) {
+    			return mid;
+    		}
+    		//if midUser comes before target username alphabetically
+    		if (comparison < 0) {
+    			low = mid + 1;// searches the right half of list 
+    		}
+    		//if target comes after target username alphabetically
+    		else {
+    			high = mid - 1;//searches the left half of list
+    		}
+    		//with every iteration list is cut in half
+    	}
+    	// if we dont find target in list 
         return -1;
+    }
+    
+    
+    public static int binarySearchByScore(ArrayList<ScoreEntry> list, int targetScore) {
+    	int low = 0;
+    	int high = list.size() - 1;
+    	
+    	while(low <= high) {
+    		int mid = low + (high - low) / 2;
+    		int midScore = list.get(mid).getScore();
+    		
+    		if(midScore == targetScore) {
+    			return mid;
+    		}
+    		if (midScore > targetScore) {
+    			low = mid + 1;
+    		}
+    		else {
+    			high = mid - 1;
+    		}
+    	}
+    	return -1;
     }
 }

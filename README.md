@@ -88,3 +88,13 @@ all the logic that is used to make this program run is stored in the src file.
  2. The selection sort work by holding a max position(typically the start of the list)  where if any value lower than the max gets left in place while the value greater than the current max position will be swapped to the front and your max position now moves to the value next in the list. In turn this gives you a sorted list in descending order from highest -> lowest.
  
  3.I verified that my sort was correct by loading the csv leaderboard in the game window where I was able to see that the scores were sorted from highest -> lowest.
+ 
+ #Searching
+ 
+ 1. Binary search works such that if we were searching inside a phonebook we would open the book directly in the middle of the book where we will be able to come to the conclusion whether our target comes before or after that middle page. You then throw away the half you done need and keep repeating this process up until you reach your target or run out of places to look.
+ 
+ 2. A binary search relies on being able to get rid of the half you dont need, with an unsorted list youre not certain if youre target will be in that list that youre throwing away, having sorted beforehand you can ensure that your target will be in either one of the two halves.
+ 
+ 3. The variables i used were 'low' for the starting index of our search range, 'high' for the ending index of our search range (list.size() - 1), and finally mid which is the placeholder for our calculated midpoint of our search.
+ 
+ 4. When the 'low' index eventually becomes greater than the 'high' index, this will cause our loop to break evidently returning -1 to prove our search was not complete.

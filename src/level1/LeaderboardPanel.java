@@ -84,24 +84,38 @@ public class LeaderboardPanel extends JPanel {
             if (allEntries.isEmpty()) { status("Load first."); return; }
 
             String target = searchField.getText().trim();
-            if (target.isEmpty()) { status("Enter a username."); return; }
+            if (target.isEmpty()) { status("Enter a username or score."); return; }
 
             ArrayList<ScoreEntry> copy = new ArrayList<>(allEntries);
-
+            int idx = -1;
+            
+         // Check if the input is a number (Score Search) or text (Username Search)
+            if (target.matches("\\d+")) { 
+                // 1. It's a number! Sort by score first.
+                int targetScore = Integer.parseInt(target);
+                LeaderboardAlgorithms.sortByScoreDescending(copy);
+                idx = LeaderboardAlgorithms.binarySearchByScore(copy, targetScore);
+                
+                if (idx >= 0) {
+                    tableModel.setData(java.util.List.of(copy.get(idx)));
+                    status("Found score " + targetScore + " at rank " + (idx + 1));
+                }
+            } else { 
             // Ensure sorted before binary search
             LeaderboardAlgorithms.sortByUsernameAscending(copy);
-
-            int idx = LeaderboardAlgorithms.binarySearchByUsername(copy, target);
+            idx = LeaderboardAlgorithms.binarySearchByUsername(copy, target);
 
             if (idx >= 0) {
                 tableModel.setData(List.of(copy.get(idx)));
                 status("Found user: " + target + " (binary search index " + idx + ")");
-            } else {
+            } 
+            }
+             if(idx < 0) {
                 tableModel.setData(List.of());
                 status("Not found: " + target + " (binary search returned -1)");
             }
-        });
-
+            });
+        
         backBtn.addActionListener(e -> router.goToMenu());
     }
 
