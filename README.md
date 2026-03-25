@@ -72,3 +72,19 @@ all the logic that is used to make this program run is stored in the src file.
  2. The int data type is used to store scores
  
  3. It would most make sense for a sorting of scores to be done inside of a leaderboard system as each user is completing the game.
+ 
+ # Sorting
+ 
+ 1. I added the sorting code inside of the LeaderboardAlgorithms class
+ 
+ 2. I chose this location because all scores will be added to the leaderboard once the game is completed, this is where sorting matters. It will make for easy lookup of the highest scores.
+ 
+ 3. The data structure that is being sorted is an ArrayList
+ 
+ TESTING THE SORTING 
+ 
+ 1. The sorting algo that I chose to use was a selection sort
+ 
+ 2. The selection sort work by holding a max position(typically the start of the list)  where if any value lower than the max gets left in place while the value greater than the current max position will be swapped to the front and your max position now moves to the value next in the list. In turn this gives you a sorted list in descending order from highest -> lowest.
+ 
+ 3.I verified that my sort was correct by loading the csv leaderboard in the game window where I was able to see that the scores were sorted from highest -> lowest.

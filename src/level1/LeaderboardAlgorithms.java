@@ -18,7 +18,25 @@ public class LeaderboardAlgorithms {
      * - Week 8 challenge/extra credit: replace with merge sort or quicksort.
      */
     public static void sortByScoreDescending(ArrayList<ScoreEntry> list) {
-        // TODO
+    	//selection sort
+    	//this outer loop resizes the list as it is sorted (ignoring sorted values)
+        for(int i = 0; i < list.size() - 1; i++) {
+        	//assuming current position is (i)  the max
+        	int maxIndex = i;
+        	//loop scans the remaining list to find the greatest value
+        	for(int j = i + 1; j < list.size(); j++) {
+        		//comparing the score (j) with the current max position/value
+        		// '>' '<' dictates whether the list is in ascending or descending order
+        		if (list.get(j).getScore() > list.get(maxIndex).getScore()) {
+        			//once you find that higher value you now hold that position as the max
+        			maxIndex = j;
+        		}
+        	}
+        	// after checking the list we swap the largest found score with the score at the current position(i)
+        	ScoreEntry temp = list.get(maxIndex); //saves the highest score temp
+        	list.set(maxIndex, list.get(i));//puts the smaller score at the back of the list
+        	list.set(i, temp);// places the high score in the front of the list
+        }
     }
 
     /**
