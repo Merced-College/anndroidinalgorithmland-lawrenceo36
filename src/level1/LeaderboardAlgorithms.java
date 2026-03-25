@@ -110,23 +110,33 @@ public class LeaderboardAlgorithms {
     
     
     public static int binarySearchByScore(ArrayList<ScoreEntry> list, int targetScore) {
+    	//defining 'low' and 'high' giving us a range to search through
     	int low = 0;
     	int high = list.size() - 1;
-    	
+    	//finding our midpoint within our defined scope
     	while(low <= high) {
+    		//typically written (low + high) / 2 for binary 
+    		//but addressing overflow errors
     		int mid = low + (high - low) / 2;
     		int midScore = list.get(mid).getScore();
-    		
+    		//checking if our mid is our targt value
     		if(midScore == targetScore) {
     			return mid;
     		}
+    		//if mid is GREATER than our target than we assume
+    		//our target must be further into the list(higher index)
     		if (midScore > targetScore) {
     			low = mid + 1;
     		}
+    		//if the mid is LESS than our target, than we assume 
+    		//our target must be closer to the front of the list(lower index)
     		else {
+    			//narrowing search to the left
     			high = mid - 1;
     		}
+    		//after every iteration, our list(search range) is cut in half
     	}
+    	//once 'low' passes 'high' and we didnt find our target
     	return -1;
     }
 }
